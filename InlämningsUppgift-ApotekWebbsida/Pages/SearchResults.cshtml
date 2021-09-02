@@ -1,0 +1,16 @@
+﻿@page
+@model InlämningsUppgift_ApotekWebbsida.Pages.SearchResultsModel
+@{
+}
+
+<h2>Lista av alla produkter som har ordet: @Model.SearchWord </h2>
+
+@foreach (var product in Model.allaProduct)
+{
+    <li>        
+        <b>@product.Namn</b>        
+        <h5 style="color:saddlebrown">    @product.Pris kr</h5>
+        <p>@product.Beskrivning</p>
+        <br />
+    </li>
+}

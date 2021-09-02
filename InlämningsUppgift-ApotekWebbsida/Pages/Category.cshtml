@@ -1,0 +1,22 @@
+﻿@page
+@model InlämningsUppgift_ApotekWebbsida.Pages.CategoryModel
+@{
+}
+<h1> @Model.CategoryName</h1>
+<ul>
+    @foreach (var product in Model.ListOffProducts)
+    {
+    <li>
+        @*<img src="img_girl.jpg" alt="Girl in a jacket" width="500" height="600">*@
+        <img src="/img/@(product.Id).jpg" alt="product" width="20%" height="25%">
+        <a asp-page="/EditProduct" asp-route-Id="@product.Id">
+            <b>@product.Namn</b>
+        </a>
+        <h5 style="color:saddlebrown">    @product.Pris kr</h5>
+        <p>@product.Beskrivning</p>
+        <br />
+    </li>
+
+    }
+
+</ul>

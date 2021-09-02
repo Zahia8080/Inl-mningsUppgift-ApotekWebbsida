@@ -1,0 +1,17 @@
+﻿@page
+@model PrivacyModel
+@{
+    ViewData["Title"] = "Sortiment";
+}
+
+<h1>ALLA Sortiment I Apoteket </h1>
+<ul>
+    @foreach (var categoryItem in Model.Lista)
+    {
+        <li>
+            <a asp-page="/Category" asp-route-categoryId="@categoryItem.Id">
+                @categoryItem.Namn
+            </a>
+        </li>
+    }
+</ul>
