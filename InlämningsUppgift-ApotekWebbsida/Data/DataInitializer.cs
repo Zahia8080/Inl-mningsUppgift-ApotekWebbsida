@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +9,60 @@ namespace InlämningsUppgift_ApotekWebbsida.Data
 {
     public class DataInitializer
     {
-        public static void SeedData(ApplicationDbContext dbContext)
+        public static void SeedData(ApplicationDbContext dbContext, UserManager<IdentityUser> userManager)
         {
             dbContext.Database.Migrate();
+            SeedRoles(dbContext);
+            SeedUsers(userManager);
             SeedCategory(dbContext);
             SeedProducts(dbContext);
+        }
+        private static void SeedUsers(UserManager<IdentityUser> userManager)
+        {
+            if (userManager.FindByEmailAsync("stefan.holmberg@systementor.se").Result == null)
+            {
+                var user = new IdentityUser();
+                user.UserName = "stefan.holmberg@systementor.se";
+                user.Email = "stefan.holmberg@systementor.se";
+                user.EmailConfirmed = true;
+
+                IdentityResult result = userManager.CreateAsync(user, "Hejsan123#").Result;
+                userManager.AddToRoleAsync(user, "Admin").Wait();
+
+            }
+            if (userManager.FindByEmailAsync("johan.garpenlov@trekronor.se").Result == null)
+            {
+                var user = new IdentityUser();
+                user.UserName = "johan.garpenlov@trekronor.se";
+                user.Email = "johan.garpenlov@trekronor.se";
+                user.EmailConfirmed = true;
+
+                IdentityResult result = userManager.CreateAsync(user, "Hejsan123#").Result;
+                userManager.AddToRoleAsync(user, "Coach").Wait();
+
+            }
+
+        }
+        private static void SeedRoles(ApplicationDbContext dbContext)
+        {
+            if (!dbContext.Roles.Any(r => r.Name == "Admin"))
+            {
+                dbContext.Roles.Add(new IdentityRole
+                {
+                    NormalizedName = "Admin",
+                    Name = "Admin"
+                });
+            }
+            if (!dbContext.Roles.Any(r => r.Name == "Coach"))
+            {
+                dbContext.Roles.Add(new IdentityRole
+                {
+                    NormalizedName = "Coach",
+                    Name = "Coach"
+                });
+            }
+
+            dbContext.SaveChanges();
         }
         private static void SeedProducts(ApplicationDbContext dbContext)
         {

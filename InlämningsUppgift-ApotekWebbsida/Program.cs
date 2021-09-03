@@ -1,5 +1,6 @@
 using InlämningsUppgift_ApotekWebbsida.Data;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -20,7 +21,8 @@ namespace InlämningsUppgift_ApotekWebbsida
             {
                 var serviceProvider = scope.ServiceProvider;
                 var dbContext = serviceProvider.GetRequiredService<ApplicationDbContext>();
-                DataInitializer.SeedData(dbContext);
+                var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
+                DataInitializer.SeedData(dbContext, userManager);
             }
 
             host.Run();

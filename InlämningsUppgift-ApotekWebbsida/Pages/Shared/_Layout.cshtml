@@ -25,12 +25,18 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Sortiment</a>
                         </li>
                     </ul>
+                    <partial name="_LoginPartial" />
+
+                    <form method="get" action="/SearchResults">
+                        <input type="text" placeholder="Type something" class="form-control" name="query" />
+                        <input type="submit" value="Search" />
+                    </form>
                 </div>
             </div>
-            <form method="get" action="/SearchResults">
-                <input type="text" placeholder="Type something" class="form-control" name="query" />
-                <input type="submit" value="Search" />
-            </form>
+            @*<form method="get" action="/SearchResults">
+                    <input type="text" placeholder="Type something" class="form-control" name="query" />
+                    <input type="submit" value="Search" />
+                </form>*@
         </nav>
     </header>
     <div class="container">
@@ -48,6 +54,8 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <partial name="_ValidationScriptsPartial" />
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
