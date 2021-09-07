@@ -19,26 +19,26 @@ namespace InlämningsUppgift_ApotekWebbsida.Data
         }
         private static void SeedUsers(UserManager<IdentityUser> userManager)
         {
-            if (userManager.FindByEmailAsync("stefan.holmberg@systementor.se").Result == null)
+            if (userManager.FindByEmailAsync("zahia.deeb.syne20lin@tucsweden.se").Result == null)
             {
                 var user = new IdentityUser();
-                user.UserName = "stefan.holmberg@systementor.se";
-                user.Email = "stefan.holmberg@systementor.se";
+                user.UserName = "zahia.deeb.syne20lin@tucsweden.se";
+                user.Email = "zahia.deeb.syne20lin@tucsweden.se";
                 user.EmailConfirmed = true;
 
-                IdentityResult result = userManager.CreateAsync(user, "Hejsan123#").Result;
+                IdentityResult result = userManager.CreateAsync(user, "123ABCabc#").Result;
                 userManager.AddToRoleAsync(user, "Admin").Wait();
 
             }
-            if (userManager.FindByEmailAsync("johan.garpenlov@trekronor.se").Result == null)
+            if (userManager.FindByEmailAsync("sam.sam@system.se").Result == null)
             {
                 var user = new IdentityUser();
-                user.UserName = "johan.garpenlov@trekronor.se";
-                user.Email = "johan.garpenlov@trekronor.se";
+                user.UserName = "sam.sam@system.se";
+                user.Email = "sam.sam@system.se";
                 user.EmailConfirmed = true;
 
                 IdentityResult result = userManager.CreateAsync(user, "Hejsan123#").Result;
-                userManager.AddToRoleAsync(user, "Coach").Wait();
+                userManager.AddToRoleAsync(user, "Product Manager").Wait();
 
             }
 
@@ -53,12 +53,12 @@ namespace InlämningsUppgift_ApotekWebbsida.Data
                     Name = "Admin"
                 });
             }
-            if (!dbContext.Roles.Any(r => r.Name == "Coach"))
+            if (!dbContext.Roles.Any(r => r.Name == "Product Manager"))
             {
                 dbContext.Roles.Add(new IdentityRole
                 {
-                    NormalizedName = "Coach",
-                    Name = "Coach"
+                    NormalizedName = "Product Manager",
+                    Name = "Product Manager"
                 });
             }
 
@@ -104,7 +104,7 @@ namespace InlämningsUppgift_ApotekWebbsida.Data
                 var categoryItem3 = dbContext.Categories.First(category => category.Namn == "Barn");
                 categoryItem3.Products.Add(product3);
             }
-            if (dbContext.Products.Count(r => r.Namn == "Twistshake Bowl") == 0)
+            if (dbContext.Products.Count(r => r.Namn == "Twistshake AntiColic") == 0)
             {
                 var product4 = new Product()
                 {

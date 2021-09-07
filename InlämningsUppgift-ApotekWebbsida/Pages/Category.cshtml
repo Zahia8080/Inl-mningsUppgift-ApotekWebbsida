@@ -2,21 +2,27 @@
 @model InlämningsUppgift_ApotekWebbsida.Pages.CategoryModel
 @{
 }
-<h1> @Model.CategoryName</h1>
+<h1> @Model.CategoryName Produkter</h1>
+<br />
 <ul>
-    @foreach (var product in Model.ListOffProducts)
-    {
-    <li>
-        @*<img src="img_girl.jpg" alt="Girl in a jacket" width="500" height="600">*@
-        <img src="/img/@(product.Id).jpg" alt="product" width="10%" height="15%">
-        <a asp-page="/EditProduct" asp-route-Id="@product.Id">
-            <b>@product.Namn</b>
-        </a>
-        <h5 style="color:saddlebrown">    @product.Pris kr</h5>
-        <p>@product.Beskrivning</p>
-        <br />
-    </li>
+        @foreach (var product in Model.ListOffProducts)
+        {
+        <li>
 
-    }
+            <img src="/img/@(product.Id).jpg" alt="product" style="width:10%; height: 12%;" />
+           
+                <b>@product.Namn</b>
+                <a asp-page="/EditProduct" asp-route-Id="@product.Id" asp-route-categoryId="@Model.CategoryId" class="btn btn-secondary active" role="button" aria-pressed="true">Redigera</a>
+          
+            <h5 style="color:saddlebrown">    @product.Pris kr</h5>
+            <p>@product.Beskrivning</p>
 
-</ul>
+            <br />
+        </li>
+
+        }
+
+    </ul>
+<br />
+<a asp-page="/NewProduct" asp-route-Id="@Model.CategoryId" class="btn btn-secondary active" role="button" aria-pressed="true">Ny produkt</a>
+

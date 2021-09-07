@@ -11,45 +11,42 @@ using Microsoft.Extensions.Logging;
 
 namespace InlämningsUppgift_ApotekWebbsida.Pages
 {
-    [Authorize(Roles= "Admin,Product Manager")]   
+    [Authorize(Roles = "Admin,Product Manager")]
     [BindProperties]
-    public class EditProductModel : PageModel
+    public class NewProductModel : PageModel
     {
-        private readonly ILogger<EditProductModel> _logger;
+        private readonly ILogger<NewProductModel> _logger;
         private readonly ApplicationDbContext _dbContext;
-        public EditProductModel(ILogger<EditProductModel> logger,
+        public NewProductModel(ILogger<NewProductModel> logger,
                ApplicationDbContext dbContext)
         {
             _logger = logger;
             _dbContext = dbContext;
         }
-        public int Id { get; set; }
-        [MaxLength(200)]
+        [MaxLength(100)]
         public string Namn { get; set; }
-        [MaxLength(100)] 
+        [MaxLength(250)]
         public string Beskrivning { get; set; }
         public string Varumärke { get; set; }
         public decimal Pris { get; set; }
-        public void OnGet(int id)
+        public void OnGet()
         {
-            Id = id;
-            var currentProduct = _dbContext.Products.First(product => product.Id == id);
-            Namn = currentProduct.Namn;
-            Beskrivning= currentProduct.Beskrivning;
-            Varumärke = currentProduct.Varumärke;
-            Pris = currentProduct.Pris;
+            
         }
-        public IActionResult OnPost(int id,int categoryId)
+        public IActionResult OnPost(int id)
         {
             if (ModelState.IsValid)
             {
-                var product = _dbContext.Products.First(c => c.Id == id);
+                var product = new Product();
                 product.Namn = Namn;
                 product.Beskrivning = Beskrivning;
                 product.Pris = Pris;
                 product.Varumärke = Varumärke;
+                _dbContext.Products.Add(product);
+                var categoryItem = _dbContext.Categories.First(category => category.Id == id);
+                categoryItem.Products.Add(product);
                 _dbContext.SaveChanges();
-                return RedirectToPage("/Category", new { id = categoryId });
+                return RedirectToPage("/Category", new { id = id });
             }
             return Page();
         }

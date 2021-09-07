@@ -11,6 +11,8 @@ namespace InlämningsUppgift_ApotekWebbsida.Data
         public string Namn { get; set; }
         public string Beskrivning { get; set; }
         public string Varumärke { get; set; }
-        public Decimal Pris { get; set; }
+        public decimal Pris { get; set; }
+
+        
     }
 }
