@@ -4,6 +4,7 @@
 }
 <h1> @Model.CategoryName Produkter</h1>
 <br />
+
 <ul>
         @foreach (var product in Model.ListOffProducts)
         {
@@ -11,14 +12,15 @@
 
             <img src="/img/@(product.Id).jpg" alt="product" style="width:10%; height: 12%;" />
            
-                <b>@product.Namn</b>
+            <a asp-page="/ProductInfo" asp-route-id="@product.Id">
+                <b>@product.Namn</b></a>
                 <a asp-page="/EditProduct" asp-route-Id="@product.Id" asp-route-categoryId="@Model.CategoryId" class="btn btn-secondary active" role="button" aria-pressed="true">Redigera</a>
-          
-            <h5 style="color:saddlebrown">    @product.Pris kr</h5>
-            <p>@product.Beskrivning</p>
 
-            <br />
-        </li>
+                <h5 style="color:saddlebrown">    @product.Pris kr</h5>
+                <p>@product.Beskrivning</p>
+
+                <br />
+</li>
 
         }
 

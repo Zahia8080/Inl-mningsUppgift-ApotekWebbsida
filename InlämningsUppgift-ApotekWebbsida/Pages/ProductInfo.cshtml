@@ -1,0 +1,12 @@
+﻿@page
+@model InlämningsUppgift_ApotekWebbsida.Pages.ProductInfoModel
+@{
+}
+<h1>Produkts Information </h1>
+<img src="/img/@(Model.Id).jpg" alt="product" style="width:10%; height: 12%;" />
+<br />
+<h3> @Model.Namn</h3>
+<h5> @Model.Pris Kr</h5>
+Beskrivning: @Model.Beskrivning
+<br />
+Varumärke: @Model.Varumärke
