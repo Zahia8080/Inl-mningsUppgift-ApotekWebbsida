@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>InlämningsUppgift_ApotekWebbsida</RootNamespace>
+    <UserSecretsId>b870168b-643b-42aa-b504-28f5cdcb9abb</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
