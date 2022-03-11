@@ -4,13 +4,14 @@
 }
 
 <h2>Lista av alla produkter som har ordet: @Model.SearchWord </h2>
-
+<br />
 @foreach (var product in Model.allaProduct)
 {
-    <li>        
-        <b>@product.Namn</b>        
-        <h5 style="color:saddlebrown">    @product.Pris kr</h5>
-        <p>@product.Beskrivning</p>
-        <br />
-    </li>
+<li>
+
+    <img src="/img/@(product.Id).jpg" alt="product" style="width:10%; height: 12%;" /> <b>@product.Namn</b>
+    <h5 style="color:saddlebrown">    @product.Pris kr</h5>
+    <p>@product.Beskrivning</p>
+    <br />
+</li>
 }

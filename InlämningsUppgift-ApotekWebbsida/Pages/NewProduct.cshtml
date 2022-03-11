@@ -2,7 +2,8 @@
 @model InlämningsUppgift_ApotekWebbsida.Pages.NewProductModel
 @{
 }
-<h1>Edit product</h1>
+<h1>Skapa en ny produkt</h1>
+<br />
 <form method="post">
     <div class="form-group">
         <label asp-for="Namn">Namn</label>
@@ -26,7 +27,7 @@
         <input class="form-control" asp-for="Varumärke">
         <span asp-validation-for="Varumärke" class="field-validation-error"></span>
     </div>
-
+    <br />
 
     <button type="submit" class="btn btn-primary">Spara</button>
 </form>

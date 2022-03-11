@@ -2,3 +2,15 @@
 @model InlämningsUppgift_ApotekWebbsida.Pages.NewCategoryModel
 @{
 }
+<h1>Skapa en ny kategori</h1>
+<br />
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Namn">Namn</label>
+        <input class="form-control" asp-for="Namn">
+        <span asp-validation-for="Namn" class="field-validation-error"></span>
+    </div>
+    <br />
+   
+    <button type="submit" class="btn btn-primary">Spara</button>
+</form>

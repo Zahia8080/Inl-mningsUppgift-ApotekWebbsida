@@ -48,5 +48,6 @@ namespace InlämningsUppgift_ApotekWebbsida.Pages
 
             }).ToList();
         }
+       
     }
 }

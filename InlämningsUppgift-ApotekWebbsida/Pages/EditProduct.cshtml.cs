@@ -11,7 +11,7 @@ using Microsoft.Extensions.Logging;
 
 namespace InlämningsUppgift_ApotekWebbsida.Pages
 {
-    //[Authorize(Roles="Admin")]
+    [Authorize(Roles= "Admin,Product Manager")]   
     [BindProperties]
     public class EditProductModel : PageModel
     {
@@ -29,6 +29,8 @@ namespace InlämningsUppgift_ApotekWebbsida.Pages
         [MaxLength(100)] 
         public string Beskrivning { get; set; }
         public string Varumärke { get; set; }
+        [BindProperty]
+        [Range(1, 1999999)]
         public decimal Pris { get; set; }
         public void OnGet(int id)
         {

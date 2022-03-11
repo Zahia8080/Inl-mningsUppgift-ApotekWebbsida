@@ -1,0 +1,77 @@
+﻿@page
+@model InlämningsUppgift_ApotekWebbsida.Pages.SortSearchModel
+@{
+    string GetAscDescForColumn(string col)
+    {
+        if (col == Model.sortcolumn) //Klickar på samma som förra gpmgem
+        {
+            if (Model.sortorder == nameof(SortSearchModel.SortOrder.asc))
+            {
+                return nameof(SortSearchModel.SortOrder.desc);
+            }
+            return nameof(SortSearchModel.SortOrder.asc);
+        }
+        return nameof(SortSearchModel.SortOrder.asc); //Klickar på ny kolumn
+    }
+}
+
+<div>
+    <form>
+        Sök: <input asp-for="q" class="form-control" />
+        <input type="submit" value="Sök" />
+    </form>
+
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-page="SortSearch" asp-route-q="@Model.q" asp-route-sortorder="@GetAscDescForColumn(nameof(SortSearchModel.ProductItem.Namn))" asp-route-sortcolumn="@nameof(SortSearchModel.ProductItem.Namn)">
+                    Namn
+                    @if (Model.sortcolumn == nameof(SortSearchModel.ProductItem.Namn))
+                    {
+        <i class="fas fa-sort-@(Model.sortorder == nameof(SortSearchModel.SortOrder.asc) ? "up" : "down")"></i>}
+                </a>
+            </th>
+            <th>
+                <a asp-page="SortSearch" asp-route-q="@Model.q" asp-route-sortorder="@GetAscDescForColumn(nameof(SortSearchModel.ProductItem.Beskrivning))" asp-route-sortcolumn="@nameof(SortSearchModel.ProductItem.Beskrivning)">
+                    Beskrivning
+                    @if (Model.sortcolumn == nameof(SortSearchModel.ProductItem.Beskrivning))
+                    {
+        <i class="fas fa-sort-@(Model.sortorder == nameof(SortSearchModel.SortOrder.asc) ? "up" : "down")"></i>}
+                </a>
+            </th>
+            <th>
+                <a asp-page="SortSearch" asp-route-q="@Model.q" asp-route-sortorder="@GetAscDescForColumn(nameof(SortSearchModel.ProductItem.Pris))" asp-route-sortcolumn="@nameof(SortSearchModel.ProductItem.Pris)">
+                    Pris
+                    @if (Model.sortcolumn == nameof(SortSearchModel.ProductItem.Pris))
+                    {
+        <i class="fas fa-sort-@(Model.sortorder == nameof(SortSearchModel.SortOrder.asc) ? "up" : "down")"></i>}
+
+                </a>
+            </th>
+            
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model.allSearchProduct)
+        {
+<tr>
+    <td>@product.Namn</td>
+    <td>@product.Beskrivning</td>
+    <td>@product.Pris</td>    
+    <td>
+        <a asp-page="/Edit" asp-route-Id="@product.Id" class="btn btn-primary">Edit</a>
+    </td>
+</tr>}
+    </tbody>
+    <tfooter>
+        <tr>
+            <td colspan="5">
+                <a asp-page="BilNew" class="btn btn-primary">Create new</a>
+            </td>
+        </tr>
+    </tfooter>
+</table>
