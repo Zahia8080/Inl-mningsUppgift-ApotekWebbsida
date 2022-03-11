@@ -1,0 +1,18 @@
+﻿@page
+@model InlämningsUppgift_ApotekWebbsida.Pages.AllCategoriesModel
+@{
+    ViewData["Title"] = "Sortiment";
+}
+<h1>ALLA Sortiment I Apoteket </h1>
+<ul>
+        @foreach (var categoryItem in Model.Lista)
+        {
+            <li>
+                <a asp-page="/Category" asp-route-id="@categoryItem.Id">
+                    @categoryItem.Namn
+                </a>
+            </li>
+        }
+</ul>
+
+<a asp-page="/NewCategory" class="btn btn-secondary active" role="button" aria-pressed="true">New</a>

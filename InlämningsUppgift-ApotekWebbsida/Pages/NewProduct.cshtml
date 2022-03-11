@@ -1,8 +1,8 @@
 ﻿@page
-@model InlämningsUppgift_ApotekWebbsida.Pages.EditProductModel
+@model InlämningsUppgift_ApotekWebbsida.Pages.NewProductModel
 @{
 }
-<h1>Edit product : @Model.Namn</h1> <img src="/img/@(Model.Id).jpg" alt="product" style="width:10%; height: 15%;" />
+<h1>Edit product</h1>
 <form method="post">
     <div class="form-group">
         <label asp-for="Namn">Namn</label>
@@ -30,7 +30,3 @@
 
     <button type="submit" class="btn btn-primary">Spara</button>
 </form>
-
- @*public string Beskrivning { get; set; }
-        public string Varumärke { get; set; }
-        public Decimal Pris { get; set; }*@

@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace InlämningsUppgift_ApotekWebbsida.Pages
 {
+    [BindProperties]
     public class CategoryModel : PageModel
     {
         private readonly ILogger<CategoryModel> _logger;
@@ -21,18 +22,21 @@ namespace InlämningsUppgift_ApotekWebbsida.Pages
             _dbContext = dbContext;
         }
         public string CategoryName { get; set; }
+        public int CategoryId { get; set; }
         public class ProductItem
         {
             public int Id { get; set; }
             public string Namn { get; set; }
             public string Beskrivning { get; set; }
             public string Varumärke { get; set; }
-            public Decimal Pris { get; set; }
+            public decimal Pris { get; set; }
+
         }
         public List<ProductItem> ListOffProducts { get; set; }
-        public void OnGet(int categoryId)
+        public void OnGet(int id)
         {
-            var currentCategory = _dbContext.Categories.Include(p=>p.Products).First(category => category.Id == categoryId);
+            CategoryId = id;
+            var currentCategory = _dbContext.Categories.Include(p=>p.Products).First(category => category.Id == id);
             CategoryName = currentCategory.Namn.ToUpper();
             ListOffProducts = currentCategory.Products.Select(product => new ProductItem
             {
@@ -41,6 +45,7 @@ namespace InlämningsUppgift_ApotekWebbsida.Pages
                 Beskrivning = product.Beskrivning,
                 Pris = product.Pris,
                 Varumärke = product.Varumärke
+
             }).ToList();
         }
     }

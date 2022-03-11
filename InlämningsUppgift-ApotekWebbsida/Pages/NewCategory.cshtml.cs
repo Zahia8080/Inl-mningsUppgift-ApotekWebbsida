@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace InlämningsUppgift_ApotekWebbsida.Pages
 {
-    public class AllaCategoriesModel : PageModel
+    public class NewCategoryModel : PageModel
     {
         public void OnGet()
         {
